@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="layouts/defaultTemplate">
+
+<head>
+	<meta charset="UTF-8">
+	<title th:text="${title}">Default Title</title>
+
+</head>
+
+<body>
+	<div layout:fragment="content" class="centerText">
+		<form action="#" th:action="@{doRegister}" th:object="${userModel}" method="post">
+			<div class="form-group">
+				<div class="form-row row">
+					<div class="col-md-3"></div>
+					<div class="form-group col-md-3">
+						<label>First Name</label>
+						<h5 class="errorMessage" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">First Name Error</h5>
+						<input type="text" class="form-control centerText" th:field="*{firstName}">
+					</div>
+					<div class="form-group col-md-3">
+						<label>Last Name</label>
+						<h5 class="errorMessage" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">Last Name Error</h5>
+						<input type="text" class="form-control centerText" th:field="*{lastName}">
+					</div>
+					<div class="form-group col-md-3"></div>
+				</div>
+				<div class="form-row row">
+					<div class="col-md-3"></div>
+					<div class="form-group col-md-3">
+						<label>Email Address</label>
+						<h5 class="errorMessage" th:if="${#fields.hasErrors('emailAddress')}" th:errors="*{emailAddress}">Email Address Error</h5>
+						<input type="email" class="form-control centerText" th:field="*{emailAddress}">
+					</div>
+					<div class="form-group col-md-3">
+						<label>Phone Number</label>
+						<h5 class="errorMessage" th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}">Phone Number Error</h5>
+						<input type="tel" class="form-control centerText" th:field="*{phoneNumber}">
+					</div>
+					<div class="col-md-3"></div>
+				</div>
+				<div class="form-row row">
+					<div class="col-md-3"></div>
+					<div class="form-group col-md-6">
+						<label>Username</label>
+						<h5 class="errorMessage" th:if="${#fields.hasErrors('credentials.username')}" th:errors="*{credentials.username}">User Name Error</h5>
+						<input type="text" class="form-control centerText" th:field="*{credentials.username}">
+					</div>
+					<div class="col-md-3"></div>
+				</div>
+				<div class="form-row row">
+					<div class="col-md-3"></div>
+					<div class="form-group col-md-6">
+						<label>Password</label>
+						<h5 class="errorMessage" th:if="${#fields.hasErrors('credentials.password')}" th:errors="*{credentials.password}">Password Error</h5>
+						<input type="password" class="form-control centerText" th:field="*{credentials.password}" >
+					</div>
+					<div class="col-md-3"></div>
+				</div>
+				
+				<div class="col-md-9">
+					<button type="submit" class="btn btn-primary pull-right">Submit</button>
+				</div>
+
+			</div>
+		</form>
+	</div>
+</body>
+
+</html>

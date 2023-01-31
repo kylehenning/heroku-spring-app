@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layouts/defaultTemplate">
+	<head>
+		<meta charset="UTF-8">
+		<title th:text="${title}">Default Title</title>
+		<script type="text/javascript" th:src="@{/js/deletePopUp.js}"></script>
+	</head>
+	<body>
+        <!-- Products page will host products in the future -->
+		<div layout:fragment="content" class="centerText">
+            <h2 th:text="${title}">Title</h2>
+            <h4>This will be the products page where you will be able to interact with the songs we are selling!</h4>
+            <br>
+
+			<form th:action="@{addProduct}" method="POST">
+				<button class="btn btn-primary" type="submit" th:name="add" >Add A Product</button>
+			</form>
+			
+			<br>
+			<br>
+
+            <!-- Passes in success message for registering or logging in -->
+			<p th:text="${redirectionAttr}">Default text</p>
+
+			<h2 th:if="${products.empty}">No Products Available</h2>
+			
+			<div class="grid-container">
+
+				<div class="card" th:each="product : ${products}">
+					<img class="card-img-top" style="width: 150px; height: 150px;" th:src="${product.image}" alt="Song Card image">
+					<div class="card-body">
+						<h5 class="card-title" th:text="${product.name}">Default Title</h5>
+						<p class="card-sub-title" th:text="${product.artistName}">Default Artist Name</p>
+						<h6 class="card-text" th:text="${product.genre}">Default Genre</h6>
+						<div class="btn-grid-container">
+							<form th:action="@{viewProduct}" method="POST">
+								<button class="btn btn-primary btn-width" type="submit" th:name="view" th:value="${product.productId}">View</button>
+							</form>
+							<form th:action="@{updateProduct}" method="POST">
+								<button class="btn btn-primary btn-width" type="submit" th:name="update" th:value="${product.productId}">Update</button>
+							</form>
+							<form th:action="@{deleteProduct}" method="POST">
+								<button class="btn btn-primary btn-width delete" type="submit" th:name="delete" th:value="${product.productId}">Delete</button>
+							</form>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</body>
+</html>

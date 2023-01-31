@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layouts/defaultTemplate">
+	<head>
+		<meta charset="UTF-8">
+		<title th:text="${title}">Default Title</title>
+		<script type="text/javascript" th:src="@{/js/deletePopUp.js}"></script>
+	</head>
+	<body>
+        <!-- Products page will host products in the future -->
+		<div layout:fragment="content" class="centerText">
+            <h2 th:text="${title}">Title</h2>
+            <div class="view-card-container">
+                <div class="card" style="width: 600px;">
+                    <img class="card-img-top" style="width: 350px; height: 350px;" th:src="${productModel.image}" alt="Song Card image">
+                    <div class="card-body">
+                        <h5 class="view-card-title" th:text="${productModel.name}">Default Title</h5>
+                        <p class="view-card-sub-title" th:text="${productModel.artistName}">Default Artist Name</p>
+                        <h6 class="view-card-text" th:text="${productModel.genre}">Default Genre</h6>
+                        <div class="btn-view-container">
+                            <!-- View will be done in future -->
+                            <form th:action="@{updateProduct}" method="POST">
+                                <button class="btn btn-primary btn-width" type="submit" th:name="update" th:value="${productModel.productId}">Update</button>
+                            </form>
+                            <form th:action="@{/products/}" method="GET">
+                            	<button class="btn btn-primary btn-width" type="submit">Back</button>
+                            </form>
+                            <form th:action="@{deleteProduct}" method="POST">
+                                <button class="btn btn-primary btn-width delete" type="submit" th:name="delete" th:value="${productModel.productId}">Delete</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            
+            </div>
+		</div>
+	</body>
+</html>
